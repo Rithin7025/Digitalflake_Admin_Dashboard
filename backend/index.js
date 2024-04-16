@@ -7,10 +7,13 @@ const app = express();
 const port = process.env.PORT;
 
 import connectDB from '../backend/database/db.js';
+import adminRoutes from './routes/adminroutes/admin.routes.js'
 connectDB();
 
-app.get('/',(req,res)=>{
-res.send('Hello world');
+app.use('/admin',adminRoutes);
+
+app.get('/test',(req,res)=>{
+res.json({message : 'test object'});
 })
 
 app.listen(port,()=>{
