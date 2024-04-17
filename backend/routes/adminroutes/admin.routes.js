@@ -2,8 +2,11 @@ import express from "express";
 
 const router = express.Router();
 
+import {addCategory} from '../../controllers/admin.controller.js';
+import { verifyAdminToken } from "../../middlewares/verifyAdminrole.js";
+
 //Route to add a new Category
-router.post("/addCategory");
+router.post("/addCategory",verifyAdminToken, addCategory);
 
 //Route to add a new Product category
 router.post("/addProduct");

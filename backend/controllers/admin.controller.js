@@ -74,3 +74,39 @@ export const adminSignin = async (req, res, next) => {
      next(error)
   }
 };
+
+
+export const addCategory = async(req,res,next) => {
+  try{
+    const {categoryName , description, status } = req.body ;
+
+    // Check if category name and description are provided
+    if(!categoryName || !description) {
+      const CategoryError = new Error('Category name and description are required');
+      CategoryError.statusCode = 400;
+      next(CategoryError)
+    }
+    //creating a new category
+    const newCategory = new Category({
+      categoryName,
+      description,
+      status: status || false //save as inactive if status is not provided
+    })
+    // saving the newCategory
+   const savedCategory =  await newCategory.save(); 
+
+   return res.status(201).json({success : true , message : 'new Category created', category : savedCategory})
+    
+  }catch(error){
+    next(error)
+  }
+}
+
+
+export const addProduct = async(req,res,next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}

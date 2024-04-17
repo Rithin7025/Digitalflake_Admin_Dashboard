@@ -11,7 +11,8 @@ const categorySchema = new Schema({
         required : true
     },
     status : {
-        type : String,
+        type : Boolean,
+        default : false
     }
 })
 

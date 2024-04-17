@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 import 'dotenv/config'
 import cors from 'cors'
+
 
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(cors({
 app.use(express.json());
 // Parse URL-encoded bodies with extended options
 app.use(express.urlencoded({extended : true}));
+app.use(cookieParser())
 
 app.use('/admin',adminRoutes);
 app.use('/admin/auth',adminAuthRoutes);
