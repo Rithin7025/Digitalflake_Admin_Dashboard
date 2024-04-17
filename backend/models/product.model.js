@@ -22,12 +22,7 @@ const productSchema = new mongoose.Schema({
         required  : true
     },
     status : {
-        type : String,
-        required : true
-    },
-    isHided : {
-        type : Boolean,
-        default : false
+        type : Boolean
     }
 })
 

@@ -103,9 +103,84 @@ export const addCategory = async(req,res,next) => {
 }
 
 
+//edit category
+export const editCategory = async(req,res,next) => {
+  console.log(req.body)
+  console.log(req.params.id)
+  const categoryId = req.params.id;
+  const {categoryName , description, status } = req.body
+
+  try {
+
+    //handle error where the category is not provided
+    if(!categoryId){
+      const CategoryIdError = new Error('Category Id not provided');
+      CategoryIdError.statusCode = 400;
+      next(CategoryIdError)
+    }
+    const existingCategory = await Category.findOne({_id : categoryId})
+    
+        if(!existingCategory){
+            const categoryNotFoundError = new Error('Category Not Found!!');
+            categoryNodFoundError.statusCode = 404 ; 
+            next(categoryNotFoundError)
+        }
+
+      //if category name is updated
+      if(categoryName){
+        existingCategory.categoryName = categoryName ; 
+      }
+
+      //if description is updated
+      if(description){
+        existingCategory.description = description ; 
+      }
+      //if status is provided 
+      if(status !== undefined){
+        existingCategory.status = status ; 
+      }
+
+      const updatedCategory = await existingCategory.save();
+
+      return res.status(200).json({success : true , message : 'Category updated successfully'})
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const addProduct = async(req,res,next) => {
   try {
-    
+     const {productName , category , packSize , image , price , status} = req.body;
+     //validate product properties
+     if(!productName || !category || !packSize || !image || !price || !status ){
+        const productAddingError = new Error('Product details are essential')
+        productAddingError.statusCode = 400;
+        next(productAddingError);
+     }
+
+     //check if a product with the same name and category is already present
+     const existingProduct = await Product.findOne({productName, category})
+     if(existingProduct){
+      const existingProductError = new Error('Cannot add the same product!')
+      existingProduct.statusCode = 400;
+      next(existingProduct)
+     }
+
+     //creating a new product instance 
+     const newProduct = new Product({
+      productName,
+      category,
+      packSize,
+      image,
+      price,
+      status
+     })
+
+
+     const savedProduct = await newProduct.save();
+     
+     return res.status(201).json({success : true , message : 'Product added successfully'})
+
   } catch (error) {
     
   }

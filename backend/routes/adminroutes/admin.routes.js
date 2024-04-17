@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import {addCategory} from '../../controllers/admin.controller.js';
+import {addCategory, editCategory} from '../../controllers/admin.controller.js';
 import { verifyAdminToken } from "../../middlewares/verifyAdminrole.js";
 
 //Route to add a new Category
@@ -18,7 +18,7 @@ router.get("/allCategory");
 router.get("/allproducts");
 
 //Route to edit category
-router.put("/editCategory");
+router.put("/editCategory/:id", verifyAdminToken , editCategory );
 
 //Route to edit Product
 router.put("/editProduct");
