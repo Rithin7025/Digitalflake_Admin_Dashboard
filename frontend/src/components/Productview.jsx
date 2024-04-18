@@ -5,21 +5,21 @@ import { FaRegEdit } from "react-icons/fa";
 
 function Productview() {
   return (
-    <div className='p-5 flex flex-col'>
+    <div className='p-5 flex flex-col mt-10'>
     <div className='h-10 w-full mb-3 flex items-center justify-between '>
      {/*category*/}
-         <div className='flex items-center px-2 gap-2'>
+         <div className='hidden lg:flex items-center px-2 gap-2'>
          <IoIosCart />
          <p className='font-semibold sm:text-sm'>Products</p>
          </div>
      {/*Search*/}
          <div>
-         <input type="text" name="" id=""  className='lg:w-96 lg:h-9 md:w-60 sm:w-40 outline-none  border-2 rounded-lg' />
+         <input type="text" name="" id=""  className='lg:w-96 lg:h-9 md:w-52 w-32 outline-none  border-2 rounded-lg' />
 
          </div>
      {/*Add*/}
          <div>
-         <button className='p-2 text-white font-semibold rounded-lg hover:bg-purple-800 bg-[#662671]'> Add New</button>
+         <button className='w-16 h-7 text-xs lg:p-2 lg:w-40 lg:h-9 lg:text-sm text-white font-semibold rounded-lg hover:bg-purple-800 bg-[#662671]'> Add New</button>
          </div>
     </div>
 

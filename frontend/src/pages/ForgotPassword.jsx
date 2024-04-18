@@ -18,12 +18,13 @@ function ForgotPassword() {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+
+                className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="johndoe@gmail.com"
                 required
               />
             </div>
-            <button className="p-3 bg-purple-950 w-full rounded-lg font-semibold text-white">Request reset link</button>
+            <button className="p-3 bg-[#662671] w-full rounded-lg font-semibold text-white">Request reset link</button>
             <div className="flex items-center justify-center">
               <button className='text-slate-500 hover:underline font-semibold'>Back to login</button>
             </div>
