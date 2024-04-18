@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IoMdArrowBack } from "react-icons/io";
 
-function CategoryAdd() {
+function CategoryEdit() {
     const [isOpen, setIsOpen] = useState(false);
     const [status, setStatus] = useState('Active');
 
@@ -22,19 +22,17 @@ function CategoryAdd() {
             <div>
                 <div className='flex items-center pl-5 pt-6 gap-2'>
                     <IoMdArrowBack className='text-2xl text-slate-600 hover:cursor-pointer' />
-                    <p className='font-semibold text-2xl '>Add Category</p>
+                    <p className='font-semibold text-2xl '>Edit Category</p>
                 </div>
             </div>
 
             {/* Body section */}
             <div className="flex flex-col lg:flex-row justify-between  p-4 ">
                 <div className="relative lg:flex-1 m-2">
-                    <input type="text" id="categoryName" name="categoryName" className="w-full border-2 border-gray-300 rounded-lg py-2 pl-8 focus:outline-none focus:ring-blue-500 focus:border-blue-500 " />
-                    <label htmlFor="categoryName" className="absolute top-2 left-3 text-gray-500 text-sm">Category Name</label>
+                    <input type="text" id="categoryName" name="categoryName" placeholder="Category" style={{ color : '#686868',fontSize : '14px'}} className="w-full border-2 border-gray-300 rounded-lg py-2 pl-8 focus:outline-none focus:ring-blue-500 focus:border-blue-500 " />
                 </div>
                 <div className="relative lg:flex-1 m-2">
-                    <input type="text" id="description" name="description" className="w-full border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none rounded-lg py-2 pl-8" />
-                    <label htmlFor="description" className="absolute top-2 left-3 text-gray-500 text-sm">Description</label>
+                    <input type="text" placeholder='Description' style={{color : '#686868',fontSize : '14px'}}  id="description" name="description" className="w-full border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none rounded-lg py-2 pl-8" />
                 </div>
                 {/* Input tag with dropdown */}
                 <div className='relative flex-1 m-2'>
@@ -79,11 +77,11 @@ function CategoryAdd() {
             {/* cancel and save button */}
             <div className='flex gap-4 lg:justify-end justify-center mt-60 md:mt-40 lg:mt-72 lg:mr-6'>
                     <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center flex justify-center rounded-3xl bg-[#FFFFFF] hover:bg-violet-500 hover:text-white border border-[#676767] text-blue-800'> cancel </button>
-                    <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 border--[#662671]  text-white'>Save</button>
+                    <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center border-2 bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 hover:text-black border-[#662671]  text-white'>Save</button>
             </div>
           </div>
         </div>
     );
 }
 
-export default CategoryAdd;
+export default CategoryEdit;

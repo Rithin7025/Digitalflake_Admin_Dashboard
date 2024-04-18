@@ -1,5 +1,5 @@
 import React from "react";
-import LogoutButton from "./Logoutbutton";
+import LogoutButton from "../buttons&input/Logoutbutton";
 
 function Header() {
   return (
@@ -80,10 +80,7 @@ function Header() {
         </svg>
       </div>
 
-    
-         
-           <LogoutButton />
-         
+      <LogoutButton />
     </div>
     // </div>
   );

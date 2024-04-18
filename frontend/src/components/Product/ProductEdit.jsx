@@ -1,13 +1,15 @@
 import React from 'react'
 import { IoMdArrowBack } from "react-icons/io";
-// MULTIPLE ISSUE WITH THE SAME ID -----------------------------------------------------------DEBUG 
-function ProductAdd() {
+
+
+function ProductEdit() {
   return (
+    
     <div className='mt-10'>
         {/* heading */}
         <div className='flex items-center pl-5 pt-6 gap-2'>
                     <IoMdArrowBack className='text-2xl text-slate-600 hover:cursor-pointer' />
-                    <p className='font-semibold text-2xl '>Add Product</p>
+                    <p className='font-semibold text-2xl '>Edit Product</p>
                 </div>
 
         {/* inputs */}
@@ -47,7 +49,7 @@ function ProductAdd() {
         </div>
 
          {/* cancel and save button */}
-         <div className='flex gap-4 lg:justify-end justify-center mt-44 ml-6 md:mt-20 lg:mt-72 lg:mr-6'>
+         <div className='flex gap-4 lg:justify-end justify-center mt-44 ml-6 md:mt-96 lg:mt-72 lg:mr-6'>
                     <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center flex justify-center rounded-3xl bg-[#FFFFFF] hover:bg-violet-500 hover:text-white border border-[#676767] text-blue-800'> cancel </button>
                     <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 border--[#662671]  text-white'>Save</button>
             </div>
@@ -55,4 +57,4 @@ function ProductAdd() {
   )
 }
 
-export default ProductAdd
+export default ProductEdit
