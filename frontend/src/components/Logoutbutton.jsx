@@ -16,8 +16,8 @@ function LogoutButton() {
           </Popover.Button>
 
           {/* Logout Popover */}
-          <Popover.Panel className="absolute z-10  bg-white rounded-lg right-0 w-48 mt-4">
-            <button onClick={() => console.log('Logout clicked')} className="block w-full text-center font-semibold border shadow-lg rounded-lg border-red-600 text-red-600 px-4 py-2 focus:outline-none">
+          <Popover.Panel className="absolute z-10  bg-white hover:bg-red-600  rounded-lg right-0 w-48 mt-4">
+            <button onClick={() => console.log('Logout clicked')} className="block w-full text-center font-semibold border hover:text-white shadow-lg rounded-lg border-red-600 text-red-600 px-4 py-2 focus:outline-none">
               Logout
             </button>
           </Popover.Panel>

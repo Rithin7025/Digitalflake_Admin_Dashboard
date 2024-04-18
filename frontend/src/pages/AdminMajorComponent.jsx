@@ -32,9 +32,9 @@ export function SidebarComponent() {
       <div className="flex-1 bg-[#FFFFFF] overflow-hidden sm:overflow-x-auto">
         {/*  page content goes here */}
         {/* <Homepage /> */}
-        <CategoryView />
+        {/* <CategoryView /> */}
         {/* <Productview /> */}
-        {/* <CategoryAdd /> */}
+        <CategoryAdd />
         
       </div>
     </div>

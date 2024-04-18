@@ -81,9 +81,9 @@ function Header() {
       </div>
 
     
-         <div className="">
+         
            <LogoutButton />
-         </div>
+         
     </div>
     // </div>
   );

@@ -3,7 +3,7 @@ import { IoMdArrowBack } from "react-icons/io";
 
 function CategoryAdd() {
     const [isOpen, setIsOpen] = useState(false);
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('Active');
 
     // Function to toggle open and close of dropdown
     const toggleDropdown = () => {
@@ -17,7 +17,7 @@ function CategoryAdd() {
     }
 
     return (
-        <div className='flex flex-col gap-6  h-full w-full scroll-smooth lg:mt-10'>
+        <div className='flex flex-col gap-6  h-full w-full scroll-smooth  mt-10'>
             {/* Heading section */}
             <div>
                 <div className='flex items-center pl-5 pt-6 gap-2'>
@@ -27,17 +27,17 @@ function CategoryAdd() {
             </div>
 
             {/* Body section */}
-            <div className="flex  flex-wrap justify-between mt-4 p-4 ">
-                <div className="relative flex-1 mr-2">
+            <div className="flex flex-col lg:flex-row justify-between  p-4 ">
+                <div className="relative lg:flex-1 m-2">
                     <input type="text" id="categoryName" name="categoryName" className="w-full border-2 border-gray-300 rounded-lg py-2 pl-8 focus:outline-none focus:ring-blue-500 focus:border-blue-500 " />
                     <label htmlFor="categoryName" className="absolute top-2 left-3 text-gray-500 text-sm">Category Name</label>
                 </div>
-                <div className="relative flex-1 mr-2">
+                <div className="relative lg:flex-1 m-2">
                     <input type="text" id="description" name="description" className="w-full border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-none rounded-lg py-2 pl-8" />
                     <label htmlFor="description" className="absolute top-2 left-3 text-gray-500 text-sm">Description</label>
                 </div>
                 {/* Input tag with dropdown */}
-                <div className='relative flex-1'>
+                <div className='relative flex-1 m-2'>
                     <input
                         type="text"
                         name="status"
@@ -77,9 +77,9 @@ function CategoryAdd() {
             </div>
           <div>
             {/* cancel and save button */}
-            <div className='flex gap-4 justify-end  lg:mt-72 lg:mr-6'>
-                    <button className='p-5 w-44 h-2 items-center flex justify-center rounded-3xl bg-[#FFFFFF] border border-[#676767] text-blue-800'> cancel </button>
-                    <button className='p-5 w-44 h-2 items-center bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 border  text-white'>Save</button>
+            <div className='flex gap-4 lg:justify-end justify-center mt-60 md:mt-40 lg:mt-72 lg:mr-6'>
+                    <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center flex justify-center rounded-3xl bg-[#FFFFFF] hover:bg-violet-500 hover:text-white border border-[#676767] text-blue-800'> cancel </button>
+                    <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 border--[#662671]  text-white'>Save</button>
             </div>
           </div>
         </div>
