@@ -1,5 +1,9 @@
 import React from 'react'
-import LoginForm from '../components/LoginForm'
+// import LoginForm from '../components/LoginForm';
+import { Suspense, lazy } from 'react';
+
+const LoginFormComponent = React.lazy(()=> import('../components/LoginForm'))
+
 
 function Login() {
   return (
@@ -10,8 +14,9 @@ function Login() {
       backgroundColor: 'rgba(214, 295, 255, 0.6)'
     }}
   >
-    
-      <LoginForm />
+      <Suspense fallback={<div> Loading ...</div>}>
+      <LoginFormComponent />
+      </Suspense>
     
     
   </div>

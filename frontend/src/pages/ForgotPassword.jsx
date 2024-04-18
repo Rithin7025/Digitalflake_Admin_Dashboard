@@ -9,7 +9,7 @@ function ForgotPassword() {
             <p className='text-lg font-semibold text-purple-900'>Did you forget your password ?</p>
           </div>
 
-          <p className="text-center">Enter your email address and wait, we'll send you a link to restore password </p>
+          <p className="text-center text-slate-500">Enter your email address and wait, we'll send you a link to restore password </p>
           <form className="space-y-8" action="" >
 
             <div>
@@ -25,7 +25,7 @@ function ForgotPassword() {
             </div>
             <button className="p-3 bg-purple-950 w-full rounded-lg font-semibold text-white">Request reset link</button>
             <div className="flex items-center justify-center">
-              <button className='text-neutral-800 hover:underline'>Back to login</button>
+              <button className='text-slate-500 hover:underline font-semibold'>Back to login</button>
             </div>
           </form>
         </div>
