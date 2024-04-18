@@ -4,13 +4,14 @@ import Homepage from "../components/Homepage";
 import CategoryView from "../components/CategoryView";
 import Productview from "../components/Productview";
 import CategoryAdd from "../components/CategoryAdd";
+import ProductAdd from "../components/ProductAdd";
 
 
 export function SidebarComponent() {
   return (
     <div className="flex h-full">
       {/* Sidebar */}
-      <Sidebar className="bg-[#F4F4F4] text-[#000000] pt-10 font-semibold w-32 lg:w-48 flex-shrink-0 ml-2 mt-4">
+      <Sidebar className="bg-[#FFFFFF] text-[#000000] pt-10 font-semibold w-32 lg:w-48 flex-shrink-0  mt-2">
 
         {/* Sidebar Items */}
         <Sidebar.Items >
@@ -34,7 +35,8 @@ export function SidebarComponent() {
         {/* <Homepage /> */}
         {/* <CategoryView /> */}
         {/* <Productview /> */}
-        <CategoryAdd />
+        {/* <CategoryAdd /> */}
+        <ProductAdd />
         
       </div>
     </div>
