@@ -1,6 +1,9 @@
 import { Sidebar } from "flowbite-react";
 import { HiInbox, HiShoppingBag, HiTable } from "react-icons/hi";
 import Homepage from "../components/Homepage";
+import CategoryView from "../components/CategoryView";
+import Productview from "../components/Productview";
+import CategoryAdd from "../components/CategoryAdd";
 
 export function SidebarComponent() {
   return (
@@ -27,7 +30,11 @@ export function SidebarComponent() {
       {/* Page Content */}
       <div className="flex-1 bg-[#FFFFFF] ">
         {/* Your page content goes here */}
-        <Homepage />
+        {/* <Homepage /> */}
+        {/* <CategoryView /> */}
+        {/* <Productview /> */}
+        <CategoryAdd />
+        
       </div>
     </div>
   );

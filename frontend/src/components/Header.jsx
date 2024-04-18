@@ -80,11 +80,8 @@ function Header() {
         </svg>
       </div>
 
-      <div className="">
-      
-      </div>
-
-         <div className="flex ">
+    
+         <div className="">
            <LogoutButton />
          </div>
     </div>
