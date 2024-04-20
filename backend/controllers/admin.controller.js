@@ -10,7 +10,7 @@ dotenv.config()
 export const adminSignup = async (req, res, next) => {
   const { name, password, email } = req.body;
 
-  const hashedPassword = bcrypt.hashSync(password, 10);
+  const hashedPassword =await bcrypt.hashSync(password, 10);
   try {
     
     const admin = new User({
@@ -38,30 +38,27 @@ export const adminSignup = async (req, res, next) => {
 
 //Handle admin login
 export const adminSignin = async (req, res, next) => {
+  console.log('entered Admin signIn❤️❤️❤️🚀🚀🚀🚀🚀🚀🚀🚀')
   try {
      const { email , password } = req.body;
      //find the user by email
+
      const user = await User.findOne({email});
      //check if the user exists
      if(!user){
       const userNotFoundError = new Error('User not found');
       userNotFoundError.statusCode = 404;
-      next(userNotFoundError);
-     }
-     //check if the user is blocked
-     if(user.isBlocked){
-      const blockedUserError = new Error("Accout is blocked")
-      blockedUserError.statusCode = 403;
-      next(blockedUserError)
-     }
+     return next(userNotFoundError);
+     }   
 
      //compare the passwords
-     const isPasswordValid = await bcrypt.compareSync(password, user.password);
+     const pas = password[0] ;  //taking the first element as the password from req.body's format is ['Password125']
+     const isPasswordValid = await bcrypt.compareSync(pas, user.password);
      
      if(!isPasswordValid){
       const incorrectPasswordError = new Error('Incorrect Password');
       incorrectPasswordError.statusCode = 401;
-      next(incorrectPasswordError)
+     return  next(incorrectPasswordError)
      }
 
      const token = jwt.sign({id : user._id , role : user.role }, process.env.JWTSECRET, {expiresIn : '1h'});
@@ -71,9 +68,9 @@ export const adminSignin = async (req, res, next) => {
      res.cookie('access_token',token, {httpOnly : true}).status(200).json({success : true , message : 'Logged In successfully', userInfo})
 
   } catch (error) {
-     next(error)
+   return  next(error)
   }
-};
+};   
 
 
 export const addCategory = async(req,res,next) => {

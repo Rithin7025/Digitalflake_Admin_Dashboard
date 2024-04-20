@@ -1,8 +1,10 @@
 import React from 'react'
 // import LoginForm from '../components/LoginForm';
 import { Suspense, lazy } from 'react';
+import LinearProgress from '@mui/joy/LinearProgress';
 
-const LoginFormComponent = React.lazy(()=> import('../components/LoginForm'))
+
+const LoginFormComponent = React.lazy(()=> import('../../components/LoginForm'))
 
 
 function Login() {
@@ -14,7 +16,12 @@ function Login() {
       backgroundColor: 'rgba(214, 295, 255, 0.6)'
     }}
   >
-      <Suspense fallback={<div> Loading ...</div>}>
+      <Suspense fallback={<LinearProgress  
+      color="primary"
+  size="md"
+  value={40}
+  variant="outlined"
+  className='mt-80 lg:mt-80 w-52 lg:w-80 ml-12 lg:ml-96 '/>}>
       <LoginFormComponent />
       </Suspense>
     

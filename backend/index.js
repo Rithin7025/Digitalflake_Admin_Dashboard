@@ -27,8 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cookieParser())
 
-app.use('/admin',adminRoutes);
-app.use('/admin/auth',adminAuthRoutes);
+app.use('/api/admin',adminRoutes);
+app.use('/api/admin/auth',adminAuthRoutes);
 
 app.get('/test',(req,res)=>{
 res.json({message : 'test object'});

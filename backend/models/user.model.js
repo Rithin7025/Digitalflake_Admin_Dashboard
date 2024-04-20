@@ -15,10 +15,6 @@ const userSchema = new Schema({
         required : true
         
     },
-    isBlocked : {
-        type : Boolean,
-        default : false,
-    },
     role : {
         type : String,
     }

@@ -1,12 +1,17 @@
+import React, {lazy,Suspense} from 'react'
 import { Sidebar } from "flowbite-react";
 import { HiInbox, HiShoppingBag, HiTable } from "react-icons/hi";
-import Homepage from "../components/Homepage";
+import LinearProgress from '@mui/joy/LinearProgress';
+
+
 import CategoryView from "../components/Category/CategoryView";
 import Productview from "../components/Product/Productview";
 import CategoryAdd from "../components/Category/CategoryAdd";
 import ProductAdd from "../components/Product/ProductAdd";
 import ProductEdit from "../components/Product/ProductEdit";
 import CategoryEdit from "../components/Category/CategoryEdit";
+import LinearProgressCountUp from '../components/fallbackUI/LinearProgressCountUp';
+const AdminHome = React.lazy(()=> import("../components/Homepage"))
 
 export function SidebarComponent() {
   return (
@@ -44,13 +49,24 @@ export function SidebarComponent() {
       {/* Page Content */}
       <div className="flex-1 bg-[#FFFFFF] overflow-hidden sm:overflow-x-auto">
         {/*  page content goes here */}
-        {/* <Homepage /> */}
+        <Suspense fallback={   <LinearProgress
+  color="primary"
+  size="md"
+  value={40}
+  variant="outlined"
+  className='mt-80 lg:mt-80 w-52 lg:w-80 ml-12 lg:ml-96'
+/>}>
+
+
+        {/* <AdminHome /> */}
         {/* <CategoryView /> */}
         {/* <Productview /> */}
         {/* <CategoryAdd /> */}
         {/* <ProductAdd /> */}
         {/* <ProductEdit /> */}
-        <CategoryEdit />
+        {/* <CategoryEdit /> */}
+</Suspense>
+     
       </div>
     </div>
   );

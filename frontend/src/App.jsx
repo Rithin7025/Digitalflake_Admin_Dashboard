@@ -1,7 +1,8 @@
 import { BrowserRouter,Route,Routes } from "react-router-dom"
-import Login from "./pages/Login"
+import Login from "./pages/Adminpages/Login"
 import ForgotPassword from "./pages/ForgotPassword"
 import Home from "./pages/Home"
+import React from "react"
 
 function App() {
 
