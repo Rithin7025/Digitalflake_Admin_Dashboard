@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateForm } from "../utils/Validateform"; //function to check errors in the form
 import axios from "axios";
+import { useDispatch,useSelector } from "react-redux";
+import { signInSuccess } from "../redux/user/userSlice";
 
 function LoginForm() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({});
   const [formError, setFormError] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.persistedReducer.user.currentUser);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/home"); // Redirect to home if user is already logged in
+    }
+  }, [currentUser, navigate]);
+
   const handleChange = (e) => {
     setFormError({});
     setFormData({
@@ -14,7 +26,8 @@ function LoginForm() {
       [e.target.id]: [e.target.value],
     });
   };
-
+   
+  
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -24,14 +37,16 @@ function LoginForm() {
 
           setLoading(true);
           const res = await axios.post("/api/admin/auth/login", formData);
-        const data = res.data
+        const data = await res.data
+        console.log(data)
         setLoading(false) //makes the loading effect false
-        console.log(`login successfull : ${data}`)
+        dispatch(signInSuccess(data))
+        navigate('/home')
       } 
       
     } catch (error) {
       setLoading(false);
-      console.log(error.response);
+      console.log(error);
       //if user with the email not found
       if(error.response.status == 404){
         setFormError({email : 'User not found. Please check your email'})

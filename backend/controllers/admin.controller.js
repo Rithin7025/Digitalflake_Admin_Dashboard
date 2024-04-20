@@ -182,3 +182,15 @@ export const addProduct = async(req,res,next) => {
     
   }
 }
+
+
+export const logout = async(req,res,next)=> {
+try{  
+  console.log('❤️❤️❤️❤️❤️❤️')
+  //clearing the JWT token from the client cookie 
+  res.clearCookie('access_token');
+  res.status(200).json({success : true , message : 'Admin Logged out successfully'})
+}catch(error){
+ return next(error)
+}
+}

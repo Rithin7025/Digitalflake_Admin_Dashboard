@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
 
-import { adminSignin,adminSignup } from '../../controllers/admin.controller.js'
+import { adminSignin,adminSignup, logout } from '../../controllers/admin.controller.js'
 
 //sample route to create an admin
 router.post('/signup',adminSignup)
@@ -13,6 +13,6 @@ router.post('/login',adminSignin)
 router.post('/resetPassword')
 
 //Route to handle admin logout
-router.get('/logout')
+router.post('/logout', logout)
 
 export default router

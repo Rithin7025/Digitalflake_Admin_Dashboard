@@ -58,7 +58,7 @@ export function SidebarComponent() {
 />}>
 
 
-        {/* <AdminHome /> */}
+        <AdminHome />
         {/* <CategoryView /> */}
         {/* <Productview /> */}
         {/* <CategoryAdd /> */}
