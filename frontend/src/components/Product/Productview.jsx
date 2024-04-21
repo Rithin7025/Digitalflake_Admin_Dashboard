@@ -40,13 +40,44 @@ function Productview({handleAddNewProduct}) {
                  }
             }
     }
-
+    //function to handle search change
     const handleSearchChange = (e) =>{
         setSearchTerm(e.target.value)
     }
+    //function to handle search
     const handleSearchSubmit= () =>{
     fetchProducts();
     
+    }
+    // function to handle delete
+    const handleProductDelete = async(productId) => {
+    try {
+        const res = await axios.delete(`/api/admin/deleteProduct/${productId}`);
+        setProductsList(prevProductList => prevProductList.filter(product => product._id !== productId));
+        toast.success('Product deleted successfully', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    } catch (error) {
+        if(error?.response?.status == 404){
+            toast.error('No Product, try again', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+        }
+    }
     }
    
     
@@ -135,7 +166,7 @@ function Productview({handleAddNewProduct}) {
    
                 </td>
                 <td className= "flex justify-center px-full py-4 hover:cursor-pointer">
-                    <MdDelete />
+                    <MdDelete onClick={()=>handleProductDelete(product._id)}/>
    
                 </td>
             </tr>

@@ -10,7 +10,7 @@ import {toast} from 'react-toastify'
 
 
 
-function CategoryView({ handleAddNewCategory }) {
+function CategoryView({ handleAddNewCategory ,handleEditCategory }) {
   const [categoryList,setCategoryList] = useState([]);
   const [searchTerm,setSearchTerm] = useState('');
 
@@ -19,7 +19,7 @@ function CategoryView({ handleAddNewCategory }) {
     //fetch category on component mount
     fetchCategories();
   },[]);
-
+  //func to fetch categories
   const fetchCategories = async() => {
     try {
         const res = await axios.get('/api/admin/allCategory',{
@@ -148,7 +148,7 @@ const handleSearch = () => {
                    {category?.status ? 'Active' :'Inactive'} {/**if the category.status is true , show Active an if false show Inactive */}
                 </td>
                 <td className="hover:cursor-pointer px-2 py-4">
-                <FaRegEdit onClick={()=> handleAddNewCategory('categoryEdit',category._id)}/>
+                <FaRegEdit onClick={()=> handleEditCategory(category._id)}/>
                 </td>
                 <td className= "flex justify-center px-full py-4 hover:cursor-pointer">
                     <MdDelete onClick={()=> handleDelete(category._id)} />

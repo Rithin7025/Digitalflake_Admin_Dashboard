@@ -123,7 +123,8 @@ export const editCategory = async(req,res,next) => {
   console.log(req.body)
   console.log(req.params.id)
   const categoryId = req.params.id;
-  const {categoryName , description, status } = req.body;
+  const {categoryName , categoryDescription, status } = req.body;
+  const description = categoryDescription;
   const categoryStatus = status == 'Active' ? true : false
 
   try {
@@ -158,7 +159,7 @@ export const editCategory = async(req,res,next) => {
 
       const updatedCategory = await existingCategory.save();
 
-      return res.status(200).json({success : true , message : 'Category updated successfully'})
+      return res.status(200).json({success : true , message : 'Category updated successfully',updatedCategory})
   } catch (error) {
     next(error)
   }
@@ -280,5 +281,36 @@ export const deleteCategory = async(req,res,next) => {
     return res.status(200).json('category deleted successfully')
   } catch (error) {
     next(error)
+  }
+}
+
+export const deleteProduct = async(req,res,next) => {
+  const product = await Product.findById(req.params.id);
+  try {
+    if(!product){
+      const ProductError = new Error('No product found');
+      ProductError.statusCode = 404;
+      return next(ProductError)
+    }
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    return res.status(200).json('product deleted successfully')
+  } catch (error) {
+    next(error)
+  }
+}
+
+//controller to retrieve particular category
+export const getCategory =async(req,res,next) => {
+  try {
+    const categoryId = req.params.id;
+    const category = await Category.findById(categoryId);
+    if(!category){
+      const CategoryError = new Error('No category found');
+      CategoryError.statusCode = 404;
+      return next(CategoryError)
+    }
+    res.status(200).json(category)
+  } catch (error) {
+    next(error);
   }
 }
