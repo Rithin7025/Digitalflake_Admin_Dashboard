@@ -2,17 +2,20 @@ import express from "express";
 
 const router = express.Router();
 
-import {addCategory, editCategory , getAllCategories, deleteCategory} from '../../controllers/admin.controller.js';
+import {addCategory, editCategory , getAllCategories, deleteCategory, addProduct, getAllProducts} from '../../controllers/admin.controller.js';
 import { verifyAdminToken } from "../../middlewares/verifyAdminrole.js";
 
 //Route to add a new Category
 router.post("/addCategory",verifyAdminToken, addCategory);
 
 //Route to add a new Product category
-router.post("/addProduct");
+router.post("/addProduct",verifyAdminToken, addProduct);
+
+//Route to retrieve all category
+router.get("/allCategory",verifyAdminToken , getAllCategories);
 
 //Route to retrieve all products
-router.get("/allCategory",verifyAdminToken , getAllCategories);
+router.get("/allProducts",verifyAdminToken, getAllProducts);
 
 //Route to retrieve all
 router.get("/allproducts");

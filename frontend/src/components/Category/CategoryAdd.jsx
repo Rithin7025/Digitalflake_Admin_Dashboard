@@ -35,7 +35,7 @@ function CategoryAdd({ handleAddNewCategory }) {
         setCategoryError(validateCategory(categoryData))
         try {
             if(Object.keys(categoryError).length == 0){
-              categoryData.status = status ; 
+              categoryData.status = status ; //Attatching the status along with the categoryData
               console.log(categoryData.status)
               const res = await axios.post('/api/admin/addCategory',categoryData)
               const data = res.data

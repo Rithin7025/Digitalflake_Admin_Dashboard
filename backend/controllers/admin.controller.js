@@ -2,12 +2,13 @@ import Product from "../models/product.model.js";
 import Category from "../models/category.model.js";
 import User from "../models/user.model.js";
 import Counter from "../models/counter.model.js";
+import CounterProduct from "../models/counter.product.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-//admin signup
+//Controller which handle admin signup
 export const adminSignup = async (req, res, next) => {
   const { name, password, email } = req.body;
 
@@ -37,7 +38,7 @@ export const adminSignup = async (req, res, next) => {
   }
 };
 
-//Handle admin login
+//Controller which Handle admin login
 export const adminSignin = async (req, res, next) => {
   console.log('entered Admin signIn❤️❤️❤️🚀🚀🚀🚀🚀🚀🚀🚀')
   try {
@@ -73,13 +74,12 @@ export const adminSignin = async (req, res, next) => {
   }
 };   
 
-
+//Controller for adding a new Category
 export const addCategory = async(req,res,next) => {
   try{
     const {categoryName , description, status } = req.body ;
 
-    console.log('entered😂😂😂😂')  
-    console.log(categoryName,description,status)
+   
     //asign true is status is Activ
     const categoryStatus = status == 'Active' ? true : false
 
@@ -118,7 +118,7 @@ export const addCategory = async(req,res,next) => {
 }
 
 
-//edit category
+//Controller to edit category
 export const editCategory = async(req,res,next) => {
   console.log(req.body)
   console.log(req.params.id)
@@ -163,17 +163,28 @@ export const editCategory = async(req,res,next) => {
     next(error)
   }
 }
-
+//controller for adding a new product
 export const addProduct = async(req,res,next) => {
   try {
-     const {productName , category , packSize , image , price , status} = req.body;
+    const {productName , category , packSize , image , price , status} = req.body;
+    
+    //extracting the value from packsize categoryName , packSize and price as they comin as array
+    
+    const nameOfProduct = productName[0].trim();
+    const packSizeOfProduct = packSize[0].trim();
+    const priceOfProduct = price[0].trim()
+   //assing the true if the status is Active 
+   const productStatus = status == 'Active' ? true : false ;
+
+
+
      //validate product properties
      if(!productName || !category || !packSize || !image || !price || !status ){
         const productAddingError = new Error('Product details are essential')
         productAddingError.statusCode = 400;
       return  next(productAddingError);
      }
-
+   
      //check if a product with the same name and category is already present
      const existingProduct = await Product.findOne({productName, category})
      if(existingProduct){
@@ -181,28 +192,34 @@ export const addProduct = async(req,res,next) => {
       existingProduct.statusCode = 409;
      return next(existingProductError)
      }
-
+     const counter = await CounterProduct.findOneAndUpdate({},{ $inc: { count: 1 } }, { new: true, upsert: true })
+     console.log(counter)
+     console.log(typeof(counter))
+     console.log('the type and counter')
      //creating a new product instance 
      const newProduct = new Product({
-      productName,
+      id : counter.count ,
+      productName : nameOfProduct,
       category,
-      packSize,
+      packSize : packSizeOfProduct,
       image,
-      price,
-      status
+      price : priceOfProduct,
+      status : productStatus
      })
-
+     console.log(newProduct,'here is hte new product')
+    console.log('before saving a new product')
 
      const savedProduct = await newProduct.save();
-     
-     return res.status(201).json({success : true , message : 'Product added successfully'})
+     console.log('<=======================================================>')
+     console.log(savedProduct,'new product')
+     return res.status(201).json(savedProduct)
 
   } catch (error) {
-    
+    console.log(error)
+    next(error)
   }
 }
-
-
+//Controller for logout
 export const logout = async(req,res,next)=> {
 try{  
   console.log('❤️❤️❤️❤️❤️❤️')
@@ -213,7 +230,7 @@ try{
  return next(error)
 }
 }
-
+//Controller to fetch all categories
 export const getAllCategories = async(req,res,next) => {
   try {
 
@@ -233,6 +250,23 @@ export const getAllCategories = async(req,res,next) => {
   }
 }
 
+//Controller to fetch all products
+export const getAllProducts = async(req,res,next)=>{
+  try {
+    const {search} = req.query;
+    if(search){
+      const products = await Product.find({productName : {$regex : search , $options : 'i'}});
+      return res.status(200).json(products)
+    }
+
+    const products = await Product.find({}).sort({createdAt : -1})
+    return res.status(200).json(products)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+}
+//controller to delete specific category
 export const deleteCategory = async(req,res,next) => {
   const category = await Category.findById(req.params.id)
   try {
