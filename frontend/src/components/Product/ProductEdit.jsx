@@ -131,7 +131,7 @@ function ProductEdit({handleAddNewProduct,productId}) {
         {/* heading */}
         <div className='flex items-center pl-5 pt-6 gap-2'>
                     <IoMdArrowBack className='text-2xl text-slate-600 hover:cursor-pointer' onClick={()=> handleAddNewProduct('products')}/>
-                    <p className='font-semibold text-2xl '>Add Product</p>
+                    <p className='font-semibold text-2xl '>Edit Product</p>
                 </div>
 
         {/* inputs */}

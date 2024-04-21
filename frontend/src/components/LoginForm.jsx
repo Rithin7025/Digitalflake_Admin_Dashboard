@@ -91,7 +91,7 @@ function LoginForm() {
                       htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Email id
+                      Email id (Adminn00@gmail.com)
                     </label>
                   )}
 
@@ -120,7 +120,7 @@ function LoginForm() {
                       htmlFor="password"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      password
+                      password(*123456As  )
                     </label>
                   )}
                   {/* display error messages regarding password */}
@@ -148,7 +148,7 @@ function LoginForm() {
               >
                 {loading ? "Signing in.." : "Login"}
               </button>
-
+              
               <div className="flex items-center justify-between">
                 <div className="flex items-start"></div>
                 <Link to={"/forgotPassword"}>

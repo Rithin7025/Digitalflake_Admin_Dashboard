@@ -1,6 +1,7 @@
 import { BrowserRouter,Route,Routes } from "react-router-dom"
 import Login from "./pages/Adminpages/Login"
 import ForgotPassword from "./pages/ForgotPassword"
+import PasswordReset from "./pages/PasswordReset"
 import Home from "./pages/Home"
 import React from "react"
 import { ToastContainer, toast } from 'react-toastify';
