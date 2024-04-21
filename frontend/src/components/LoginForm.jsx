@@ -42,17 +42,18 @@ function LoginForm() {
         setLoading(false) //makes the loading effect false
         dispatch(signInSuccess(data))
         navigate('/home')
+       
       } 
       
     } catch (error) {
       setLoading(false);
       console.log(error);
       //if user with the email not found
-      if(error.response.status == 404){
+      if(error.response?.status == 404){
         setFormError({email : 'User not found. Please check your email'})
       }
             //if the user with the email found but not the same password
-            if(error.response.status == 401){
+            if(error.response?.status == 401){
                 setFormError({password : 'Incorrect password.Check your password and enter again'})
               }
       

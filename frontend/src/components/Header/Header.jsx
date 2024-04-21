@@ -5,7 +5,7 @@ function Header() {
   return (
     // <div>
     <div className="w-full h-12 bg-[#662671] absolute flex items-center justify-between top-0 left-0 gap-1 px-5 ">
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-2 h-full">
         <svg
           width="22"
           

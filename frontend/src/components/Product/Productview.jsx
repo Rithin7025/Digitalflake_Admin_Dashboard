@@ -3,7 +3,7 @@ import { IoIosCart } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
-function Productview() {
+function Productview({handleAddNewProduct}) {
   return (
     <div className='p-5 flex flex-col mt-10'>
     <div className='h-10 w-full mb-3 flex items-center justify-between '>
@@ -16,10 +16,10 @@ function Productview() {
          <div>
          <input type="text" name="" id=""  className='lg:w-96 lg:h-9 md:w-52 w-32 outline-none  border-2 rounded-lg' />
 
-         </div>
+         </div> 
      {/*Add*/}
          <div>
-         <button className='w-16 h-7 text-xs lg:p-2 lg:w-40 lg:h-9 lg:text-sm text-white font-semibold rounded-lg hover:bg-purple-800 bg-[#662671]'> Add New</button>
+         <button onClick={() =>handleAddNewProduct('productAdd')} className='w-16 h-7 text-xs lg:p-2 lg:w-40 lg:h-9 lg:text-sm text-white font-semibold rounded-lg hover:bg-purple-800 bg-[#662671]'> Add New</button>
          </div>
     </div>
 

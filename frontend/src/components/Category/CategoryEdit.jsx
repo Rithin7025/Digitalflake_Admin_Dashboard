@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IoMdArrowBack } from "react-icons/io";
 
-function CategoryEdit() {
+function CategoryEdit({handleAddNewCategory}) {
     const [isOpen, setIsOpen] = useState(false);
     const [status, setStatus] = useState('Active');
 
@@ -21,7 +21,7 @@ function CategoryEdit() {
             {/* Heading section */}
             <div>
                 <div className='flex items-center pl-5 pt-6 gap-2'>
-                    <IoMdArrowBack className='text-2xl text-slate-600 hover:cursor-pointer' />
+                    <IoMdArrowBack className='text-2xl text-slate-600 hover:cursor-pointer' onClick={()=> handleAddNewCategory('category')}/>
                     <p className='font-semibold text-2xl '>Edit Category</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@ function CategoryEdit() {
           <div>
             {/* cancel and save button */}
             <div className='flex gap-4 lg:justify-end justify-center mt-60 md:mt-40 lg:mt-72 lg:mr-6'>
-                    <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center flex justify-center rounded-3xl bg-[#FFFFFF] hover:bg-violet-500 hover:text-white border border-[#676767] text-blue-800'> cancel </button>
+                    <button onClick={()=> handleAddNewCategory('category')} className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center flex justify-center rounded-3xl bg-[#FFFFFF] hover:bg-violet-500 hover:text-white border border-[#676767] text-blue-800'> cancel </button>
                     <button className='p-3 lg:p-5 w-20 lg:w-44 h-8 items-center border-2 bg-[#662671] flex justify-center rounded-3xl hover:bg-purple-800 hover:text-black border-[#662671]  text-white'>Save</button>
             </div>
           </div>

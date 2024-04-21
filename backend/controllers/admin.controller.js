@@ -1,6 +1,7 @@
 import Product from "../models/product.model.js";
 import Category from "../models/category.model.js";
 import User from "../models/user.model.js";
+import Counter from "../models/counter.model.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -77,17 +78,34 @@ export const addCategory = async(req,res,next) => {
   try{
     const {categoryName , description, status } = req.body ;
 
+    console.log('entered😂😂😂😂')  
+    console.log(categoryName,description,status)
+    //asign true is status is Activ
+    const categoryStatus = status == 'Active' ? true : false
+
     // Check if category name and description are provided
     if(!categoryName || !description) {
       const CategoryError = new Error('Category name and description are required');
       CategoryError.statusCode = 400;
-      next(CategoryError)
+     return next(CategoryError)
+    }
+
+    const existingCategory = await Category.findOne({categoryName});
+    if(existingCategory){
+      const categoryAddError = new Error('Category Already exists');
+      categoryAddError.statusCode = 409;
+      return next(categoryAddError)
+
     }
     //creating a new category
+
+    //Get the next id from the counter collection
+    const counter = await Counter.findOneAndUpdate({}, { $inc: { count: 1 } }, { new: true, upsert: true });
     const newCategory = new Category({
+      id : counter.count,
       categoryName,
       description,
-      status: status || false //save as inactive if status is not provided
+      status: categoryStatus || false //save as inactive if status is not provided
     })
     // saving the newCategory
    const savedCategory =  await newCategory.save(); 
@@ -95,7 +113,7 @@ export const addCategory = async(req,res,next) => {
    return res.status(201).json({success : true , message : 'new Category created', category : savedCategory})
     
   }catch(error){
-    next(error)
+   return next(error)
   }
 }
 
@@ -105,7 +123,8 @@ export const editCategory = async(req,res,next) => {
   console.log(req.body)
   console.log(req.params.id)
   const categoryId = req.params.id;
-  const {categoryName , description, status } = req.body
+  const {categoryName , description, status } = req.body;
+  const categoryStatus = status == 'Active' ? true : false
 
   try {
 
@@ -113,14 +132,14 @@ export const editCategory = async(req,res,next) => {
     if(!categoryId){
       const CategoryIdError = new Error('Category Id not provided');
       CategoryIdError.statusCode = 400;
-      next(CategoryIdError)
+     return next(CategoryIdError)
     }
     const existingCategory = await Category.findOne({_id : categoryId})
     
         if(!existingCategory){
             const categoryNotFoundError = new Error('Category Not Found!!');
-            categoryNodFoundError.statusCode = 404 ; 
-            next(categoryNotFoundError)
+            categoryNotFoundError.statusCode = 404 ; 
+          return  next(categoryNotFoundError)
         }
 
       //if category name is updated
@@ -134,7 +153,7 @@ export const editCategory = async(req,res,next) => {
       }
       //if status is provided 
       if(status !== undefined){
-        existingCategory.status = status ; 
+        existingCategory.status = categoryStatus ; 
       }
 
       const updatedCategory = await existingCategory.save();
@@ -152,15 +171,15 @@ export const addProduct = async(req,res,next) => {
      if(!productName || !category || !packSize || !image || !price || !status ){
         const productAddingError = new Error('Product details are essential')
         productAddingError.statusCode = 400;
-        next(productAddingError);
+      return  next(productAddingError);
      }
 
      //check if a product with the same name and category is already present
      const existingProduct = await Product.findOne({productName, category})
      if(existingProduct){
       const existingProductError = new Error('Cannot add the same product!')
-      existingProduct.statusCode = 400;
-      next(existingProduct)
+      existingProduct.statusCode = 409;
+     return next(existingProductError)
      }
 
      //creating a new product instance 
@@ -193,4 +212,39 @@ try{
 }catch(error){
  return next(error)
 }
+}
+
+export const getAllCategories = async(req,res,next) => {
+  try {
+
+    const { search } = req.query;
+    if(search){
+       // If search query is provided, perform search
+       console.log('entered with params🍳🍳🍳🍳🍳🍳')
+       console.log(search)
+      const categories = await Category.find({categoryName : {$regex : search, $options : 'i'}});
+      return res.status(200).json(categories)
+    }
+    const categories = await Category.find({}).sort({createdAt : -1});
+    res.status(200).json(categories);
+    
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const deleteCategory = async(req,res,next) => {
+  const category = await Category.findById(req.params.id)
+  try {
+    if(!category){
+      const CategoryError = new Error('No category found');
+      CategoryError.statusCode = 404;
+      return next(CategoryError)
+    }
+   
+    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+    return res.status(200).json('category deleted successfully')
+  } catch (error) {
+    next(error)
+  }
 }
