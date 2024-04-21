@@ -6,7 +6,7 @@ import axios from 'axios'
 import {toast} from 'react-toastify'
 
 
-function Productview({handleAddNewProduct}) {
+function Productview({handleAddNewProduct,handleEditProduct}) {
 
     const [productsList,setProductsList] = useState([]);
     const [searchTerm,setSearchTerm] = useState('')
@@ -138,7 +138,7 @@ function Productview({handleAddNewProduct}) {
         
         {
             productsList.map(product => (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr key={product._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td scope="row" className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {product.id}
                 </td>
@@ -153,16 +153,16 @@ function Productview({handleAddNewProduct}) {
                 </td>
                 
                 <td className="px-4 py-4">
-                   {product.packSize} 
+                   {product.price} 
                 </td>
                 <td className="px-4 py-4 flex justify-center items-center">
-                   <img src={product.image} className='sm:h-6 sm:w-6 h-8 w-8 object-fill' alt="" />
+                   <img src={product.image} className='sm:h-6 sm:w-6 h-8 w-8 object-fill' alt="img" />
                 </td>
-                <td className={`px-4 py-4  ${product.status  ? 'text-green-600 font-medium ' : 'text-red-600 font-medium'}`}>
-                   <p > {product?.status ? 'Active' : 'InActive'}</p>
+                <td className={`px-4 py-4  ${product.status  ? 'text-green-600' : 'text-red-600'}`}>
+                {product?.status ? 'Active' :'Inactive'} 
                 </td>
                 <td className="hover:cursor-pointer px-2 py-4">
-                <FaRegEdit />
+                <FaRegEdit onClick={()=> handleEditProduct(product._id)}/>
    
                 </td>
                 <td className= "flex justify-center px-full py-4 hover:cursor-pointer">

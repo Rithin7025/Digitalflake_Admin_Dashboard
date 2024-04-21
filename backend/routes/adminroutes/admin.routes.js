@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import {addCategory, editCategory , getAllCategories, deleteCategory, addProduct, getAllProducts, deleteProduct, getCategory} from '../../controllers/admin.controller.js';
+import {addCategory, editCategory , getAllCategories, deleteCategory, addProduct, getAllProducts, deleteProduct, getCategory, getProduct, editProduct} from '../../controllers/admin.controller.js';
 import { verifyAdminToken } from "../../middlewares/verifyAdminrole.js";
 
 //Route to add a new Category
@@ -13,6 +13,9 @@ router.post("/addProduct",verifyAdminToken, addProduct);
 
 //Route to retrieve particular category
 router.get("/category/:id",verifyAdminToken , getCategory);
+
+//Route to retrieve particular product
+router.get("/product/:id",verifyAdminToken , getProduct);
 
 //Route to retrieve all category
 router.get("/allCategory",verifyAdminToken , getAllCategories);
@@ -30,7 +33,7 @@ router.put("/editCategory/:id", verifyAdminToken , editCategory );
 router.delete("/deleteCategory/:id", verifyAdminToken , deleteCategory );
 
 //Route to edit Product
-router.put("/editProduct");
+router.put("/editProduct/:id",verifyAdminToken,editProduct);
 
 //Route to delete Product
 router.delete("/deleteProduct/:id",verifyAdminToken,deleteProduct );

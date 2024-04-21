@@ -39,13 +39,13 @@ function CategoryEdit({handleAddNewCategory, categoryId}) {
             console.log(error)
         }
     }
-
+    console.log(status)
     //function to update category 
     const handleCategoryUpdate = async() => {
         try{
-            const res = axios.put(`/api/admin/editCategory/${categoryId}`,{categoryName, categoryDescription})
+            const res = await axios.put(`/api/admin/editCategory/${categoryId}`,{categoryName, categoryDescription, status})
             console.log(res.data)
-            toast.success('Newcategoryy updated!', {
+            toast.success('category updated!', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,

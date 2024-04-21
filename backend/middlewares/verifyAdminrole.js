@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const verifyAdminToken =  ((req,res, next) => {
-    console.log(req.cookies,"🚀🚀")
+    
     const adminToken = req.cookies.access_token;
     
     if(!adminToken){

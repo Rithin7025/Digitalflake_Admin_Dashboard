@@ -20,11 +20,11 @@ export function SidebarComponent() {
   const [seletectedItem, setSeletectedItem] = useState('home');
   //states that determine to show wheather the add category/product or view category/product
   const [categoryId,setCategoryId] = useState(null);
+  const [productId,setProductId] = useState(null);
 
   //function to set the isAdd category/product (passing the function as props to the category/product view)
   const handleAddNewCategory = (isAddCategory)=> {
     setSeletectedItem(isAddCategory)
-    
     
   }
 
@@ -33,8 +33,14 @@ export function SidebarComponent() {
     setSeletectedItem('categoryEdit')
     setCategoryId(categoryId)
 }
+  //function to set the selected item to edit category and to set the category id
+  const handleEditProduct = (productId)=> {
+    setSeletectedItem('productEdit')
+    setProductId(productId)
+    
+}
 
-  const handleAddNewProduct = (isAddProduct='products',id) => {
+  const handleAddNewProduct = (isAddProduct) => {
     setSeletectedItem(isAddProduct)
   }
 
@@ -49,7 +55,7 @@ export function SidebarComponent() {
       case 'home' : 
       return <AdminHome />
       case 'products' :
-      return  <Productview handleAddNewProduct={handleAddNewProduct}/> 
+      return  <Productview handleAddNewProduct={handleAddNewProduct} handleEditProduct={handleEditProduct}/> 
       case 'productAdd': 
       return <ProductAdd handleAddNewProduct={handleAddNewProduct}/> 
       case 'category' : 
@@ -58,6 +64,8 @@ export function SidebarComponent() {
       return <CategoryAdd handleAddNewCategory={handleAddNewCategory}/> 
       case 'categoryEdit' :
       return <CategoryEdit handleAddNewCategory={handleAddNewCategory} categoryId={categoryId}/>
+      case 'productEdit' :
+      return <ProductEdit handleAddNewProduct={handleAddNewProduct} productId={productId}/>
       default : 
       return null 
 

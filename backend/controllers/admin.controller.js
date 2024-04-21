@@ -40,7 +40,6 @@ export const adminSignup = async (req, res, next) => {
 
 //Controller which Handle admin login
 export const adminSignin = async (req, res, next) => {
-  console.log('entered Admin signIn❤️❤️❤️🚀🚀🚀🚀🚀🚀🚀🚀')
   try {
      const { email , password } = req.body;
      //find the user by email
@@ -125,7 +124,6 @@ export const editCategory = async(req,res,next) => {
   const categoryId = req.params.id;
   const {categoryName , categoryDescription, status } = req.body;
   const description = categoryDescription;
-  const categoryStatus = status == 'Active' ? true : false
 
   try {
 
@@ -154,15 +152,68 @@ export const editCategory = async(req,res,next) => {
       }
       //if status is provided 
       if(status !== undefined){
-        existingCategory.status = categoryStatus ; 
+        existingCategory.status = status ; 
       }
-
+     
       const updatedCategory = await existingCategory.save();
-
+      
       return res.status(200).json({success : true , message : 'Category updated successfully',updatedCategory})
   } catch (error) {
     next(error)
   }
+}
+
+//controller to edit product
+export const editProduct = async(req,res,next) =>{
+ try {
+  console.log(req.body)
+  console.log(req.params.id)
+  const productId = req.params.id;
+  const {productName , packSize,price,category, status } = req.body;
+  
+  //handle error where the product is not provided
+  if(!productId){
+    const productIdError = new Error('product Id not provided');
+    productIdError.statusCode = 400;
+   return next(productIdError)
+  }
+
+  const existingProduct = await Product.findOne({_id : productId});
+
+  if(!existingProduct){
+    const ProductNotFoundError = new Error('Product Not Found!!');
+    ProductNotFoundError.statusCode = 404 ; 
+  return  next(ProductNotFoundError)
+}
+
+  //if productName is updated 
+  if(productName){
+    existingProduct.productName = productName;
+  }
+
+  //if packsize is updated
+  if(packSize){
+    existingProduct.packSize = packSize
+  }
+  //if price is updated
+  if(price){
+    existingProduct.price = price
+  }
+  //if category is updated
+  if(category){
+    existingProduct.category = category;
+  }
+  
+  //if status is provided 
+  if(status !== undefined){
+    existingProduct.status = status ; 
+  }
+
+  const updatedProduct = await existingProduct.save();
+  return res.status(200).json(updatedProduct);
+ } catch (error) {
+   console.log(error)
+ }
 }
 //controller for adding a new product
 export const addProduct = async(req,res,next) => {
@@ -283,7 +334,7 @@ export const deleteCategory = async(req,res,next) => {
     next(error)
   }
 }
-
+//controller to delete product
 export const deleteProduct = async(req,res,next) => {
   const product = await Product.findById(req.params.id);
   try {
@@ -312,5 +363,21 @@ export const getCategory =async(req,res,next) => {
     res.status(200).json(category)
   } catch (error) {
     next(error);
+  }
+}
+
+//controller to retrieve particular product
+export const getProduct =  async(req,res,next) => {
+  try{
+    const productId = req.params.id;
+    const product  = await Product.findById(productId)
+    if(!product){
+      const ProductError = new Error('No Product found');
+        ProductError.statusCode = 404;
+        return next(ProductError)
+    }
+    res.status(200).json(product)
+  }catch(error){
+    next(error)
   }
 }
